@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:training_and_diet_app/services/auth.dart';
 import 'package:training_and_diet_app/ui/pages/register.dart';
+import 'package:training_and_diet_app/ui/pages/profile_screen.dart';
 
 class Login extends StatefulWidget {
   const Login({Key key}) : super(key: key);
@@ -126,6 +127,12 @@ class _LoginState extends State<Login> {
                             _emailController.text, _passwordController.text);
                         if (user != null) {
                           print("Masukk BOSS");
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) {
+                              return ProfileScreen();
+                            }),
+                          );
                         } else {
                           print("Error");
                         }

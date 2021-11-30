@@ -21,6 +21,12 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: Login(),
+      routes: <String, WidgetBuilder> {
+          '/login': (BuildContext context) => new Login(),
+          '/profileScreen' : (BuildContext context) => new ProfileScreen(),
+          '/bmi' : (BuildContext context) => new InputPage(),
+          // '/realprofile' : (BuildContext context) => new Screen4()
+        },
     );
   }
 }

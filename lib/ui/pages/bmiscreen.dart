@@ -1,10 +1,12 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:training_and_diet_app/ui/pages/profile_screen.dart';
 
 int height = 180;
 int wieght = 10;
 int age = 10;
+int _selectedIndex = 1;
 
 void reset() {
   height = 120;
@@ -45,6 +47,75 @@ class _InputPageState extends State<InputPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: ClipRRect(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
+        child: BottomNavigationBar(
+          iconSize: 40,
+          selectedIconTheme: IconThemeData(
+            color: const Color(0xFF200087),
+          ),
+          unselectedIconTheme: IconThemeData(
+            color: Colors.black12,
+          ),
+          items: [
+            BottomNavigationBarItem(
+              icon: Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: Icon(Icons.home),
+              ),
+              title: Text(
+                "Home",
+                style: const TextStyle(color: Colors.white),
+              ),
+            ),
+            BottomNavigationBarItem(
+              icon: Padding(
+                child: Icon(Icons.calculate),
+                padding: const EdgeInsets.only(top: 8.0),
+              ),
+              title: Text(
+                "BMI Calculator",
+                style: const TextStyle(color: Colors.white),
+              ),
+            ),
+            BottomNavigationBarItem(
+              icon: Padding(
+                child: Icon(Icons.person),
+                padding: const EdgeInsets.only(top: 8.0),
+              ),
+              title: Text(
+                "Profile",
+                style: const TextStyle(color: Colors.white),
+              ),
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          onTap: (int _selectedIndex) {
+            switch (_selectedIndex) {
+              case 0:
+                Navigator.popAndPushNamed(
+                  context,
+                  '/profileScreen'
+                );
+                break;
+              // case 1:
+              //   Navigator.push(
+              //     context,
+              //     MaterialPageRoute(builder: (context) {
+              //       return InputPage();
+              //     }),
+              //   );
+              //   break;
+              // case 2:
+              //   Navigator.popAndPushNamed(
+              //     context,
+                  
+              //   );
+              //   break;
+            }
+          },
+        ),
+      ),
       backgroundColor: Color(0xFF0A0E21),
       // appBar: AppBar(
       //   title: Center(
