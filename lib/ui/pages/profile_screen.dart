@@ -79,13 +79,13 @@ class ProfileScreen extends StatelessWidget {
                 );
                 break;
               // case 2: test@test.testtest
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) {
-                //     return ProfileScreen();
-                //   }),
-                // );
-                // break;
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) {
+              //     return ProfileScreen();
+              //   }),
+              // );
+              // break;
             }
           },
         ),
@@ -104,10 +104,16 @@ class ProfileScreen extends StatelessWidget {
               child: Container(
                 color: Colors.white,
                 padding: const EdgeInsets.only(
-                    top: 40, left: 32, right: 16, bottom: 10),
+                    top: 40, left: 16, right: 16, bottom: 10),
+                alignment: Alignment.center,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
+                    // ListView(
+                    // shrinkWrap: true,
+                    // children: <Widget>[
                     ListTile(
                       title: Text(
                         "${DateFormat("EEEE").format(today)}, ${DateFormat("d MMMM").format(today)}",
@@ -126,18 +132,24 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       trailing: ClipOval(child: Image.asset("assets/user.jpg")),
                     ),
+                    // ],
+                    // ),
+                    //test@test.testtest
                     SizedBox(
                       height: 10,
                     ),
                     Row(
                       children: <Widget>[
+                        SizedBox(
+                          width: 40,
+                        ),
                         _RadialProgress(
-                          width: width * 0.4,
-                          height: width * 0.4,
+                          width: width * 0.2,
+                          height: width * 0.2,
                           progress: 0.7,
                         ),
                         SizedBox(
-                          width: 10,
+                          width: 40,
                         ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -152,7 +164,7 @@ class ProfileScreen extends StatelessWidget {
                               width: width * 0.28,
                             ),
                             SizedBox(
-                              height: 10,
+                              height: 5,
                             ),
                             _IngredientProgress(
                               ingredient: "Carbs",
@@ -162,7 +174,7 @@ class ProfileScreen extends StatelessWidget {
                               width: width * 0.28,
                             ),
                             SizedBox(
-                              height: 10,
+                              height: 5,
                             ),
                             _IngredientProgress(
                               ingredient: "Fat",
@@ -251,6 +263,7 @@ class ProfileScreen extends StatelessWidget {
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
                               children: <Widget>[
                                 SizedBox(
                                   width: 20,
@@ -274,7 +287,7 @@ class ProfileScreen extends StatelessWidget {
                                     "Upper Body",
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 24,
+                                      fontSize: 15,
                                       fontWeight: FontWeight.w800,
                                     ),
                                   ),
@@ -283,7 +296,7 @@ class ProfileScreen extends StatelessWidget {
                                   child: Row(
                                     children: <Widget>[
                                       SizedBox(
-                                        width: 20,
+                                        width: 50,
                                       ),
                                       Container(
                                         decoration: BoxDecoration(
@@ -300,7 +313,7 @@ class ProfileScreen extends StatelessWidget {
                                         ),
                                       ),
                                       SizedBox(
-                                        width: 10,
+                                        width: 20,
                                       ),
                                       Container(
                                         decoration: BoxDecoration(
@@ -317,7 +330,7 @@ class ProfileScreen extends StatelessWidget {
                                         ),
                                       ),
                                       SizedBox(
-                                        width: 10,
+                                        width: 20,
                                       ),
                                       Container(
                                         decoration: BoxDecoration(
@@ -334,7 +347,7 @@ class ProfileScreen extends StatelessWidget {
                                         ),
                                       ),
                                       SizedBox(
-                                        width: 10,
+                                        width: 20,
                                       ),
                                     ],
                                   ),
@@ -441,7 +454,7 @@ class _RadialProgress extends StatelessWidget {
                 TextSpan(
                   text: "1731",
                   style: TextStyle(
-                    fontSize: 32,
+                    fontSize: 25,
                     fontWeight: FontWeight.w700,
                     color: const Color(0xFF200087),
                   ),
@@ -450,7 +463,7 @@ class _RadialProgress extends StatelessWidget {
                 TextSpan(
                   text: "kcal left",
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 9,
                     fontWeight: FontWeight.w500,
                     color: const Color(0xFF200087),
                   ),
@@ -547,13 +560,14 @@ class _MealCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     SizedBox(height: 5),
                     Text(
                       meal.mealTime,
                       style: const TextStyle(
                         fontWeight: FontWeight.w500,
-                        fontSize: 14,
+                        fontSize: 7,
                         color: Colors.blueGrey,
                       ),
                     ),
@@ -561,7 +575,7 @@ class _MealCard extends StatelessWidget {
                       meal.name,
                       style: const TextStyle(
                         fontWeight: FontWeight.w700,
-                        fontSize: 18,
+                        fontSize: 11,
                         color: Colors.black,
                       ),
                     ),
@@ -569,7 +583,7 @@ class _MealCard extends StatelessWidget {
                       "${meal.kiloCaloriesBurnt} kcal",
                       style: const TextStyle(
                         fontWeight: FontWeight.w500,
-                        fontSize: 14,
+                        fontSize: 9,
                         color: Colors.blueGrey,
                       ),
                     ),
@@ -587,7 +601,7 @@ class _MealCard extends StatelessWidget {
                           "${meal.timeTaken} min",
                           style: const TextStyle(
                             fontWeight: FontWeight.w500,
-                            fontSize: 14,
+                            fontSize: 10,
                             color: Colors.blueGrey,
                           ),
                         ),

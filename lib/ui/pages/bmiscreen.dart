@@ -349,7 +349,7 @@ class _InputPageState extends State<InputPage> {
             child: Container(
               child: Center(
                 child: Text(
-                  'CALCULATE BI',
+                  'CALCULATE BMI',
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 35.0,
