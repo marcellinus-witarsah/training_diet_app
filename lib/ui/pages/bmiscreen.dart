@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:training_and_diet_app/ui/pages/profile_screen.dart';
+//import 'package:training_and_diet_app/ui/pages/profile_screen.dart';
 
 int height = 180;
 int wieght = 10;
@@ -80,11 +80,11 @@ class _InputPageState extends State<InputPage> {
             ),
             BottomNavigationBarItem(
               icon: Padding(
-                child: Icon(Icons.person),
+                child: Icon(Icons.food_bank_rounded),
                 padding: const EdgeInsets.only(top: 8.0),
               ),
               title: Text(
-                "Profile",
+                "Food",
                 style: const TextStyle(color: Colors.white),
               ),
             ),
@@ -96,6 +96,12 @@ class _InputPageState extends State<InputPage> {
                 Navigator.popAndPushNamed(
                   context,
                   '/profileScreen'
+                );
+                break;
+              case 2:
+                Navigator.popAndPushNamed(
+                  context,
+                  '/recipe'
                 );
                 break;
               // case 1:

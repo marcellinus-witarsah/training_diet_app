@@ -52,11 +52,11 @@ class ProfileScreen extends StatelessWidget {
             ),
             BottomNavigationBarItem(
               icon: Padding(
-                child: Icon(Icons.person),
+                child: Icon(Icons.food_bank_rounded),
                 padding: const EdgeInsets.only(top: 8.0),
               ),
               title: Text(
-                "Profile",
+                "Food",
                 style: const TextStyle(color: Colors.white),
               ),
             ),
@@ -76,6 +76,12 @@ class ProfileScreen extends StatelessWidget {
                 Navigator.popAndPushNamed(
                   context,
                   '/bmi',
+                );
+                break;
+              case 2:
+                Navigator.popAndPushNamed(
+                  context,
+                  '/recipe',
                 );
                 break;
               // case 2: test@test.testtest

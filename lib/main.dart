@@ -2,8 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:training_and_diet_app/ui/pages/login.dart';
 import 'package:training_and_diet_app/ui/pages/profile_screen.dart';
-import 'package:training_and_diet_app/ui/pages/workout_screen.dart';
+//import 'package:training_and_diet_app/ui/pages/workout_screen.dart';
 import 'package:training_and_diet_app/ui/pages/bmiscreen.dart';
+import 'package:training_and_diet_app/ui/pages/recipes_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
           '/login': (BuildContext context) => new Login(),
           '/profileScreen' : (BuildContext context) => new ProfileScreen(),
           '/bmi' : (BuildContext context) => new InputPage(),
+          '/recipe' : (BuildContext context) => new RecipePage(),
           // '/realprofile' : (BuildContext context) => new Screen4()
         },
     );

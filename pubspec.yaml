@@ -28,6 +28,8 @@ dependencies:
   firebase_core: ^1.10.0
   font_awesome_flutter: ^9.2.0
   animations: ^2.0.2
+  duration: ^2.0.0
+  cloud_firestore: ^3.1.1
 
 dev_dependencies:
   flutter_test:
