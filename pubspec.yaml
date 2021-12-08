@@ -30,6 +30,7 @@ dependencies:
   animations: ^2.0.2
   duration: ^2.0.0
   cloud_firestore: ^3.1.1
+  provider: ^6.0.1
 
 dev_dependencies:
   flutter_test:

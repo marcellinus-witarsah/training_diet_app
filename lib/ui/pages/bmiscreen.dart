@@ -88,21 +88,28 @@ class _InputPageState extends State<InputPage> {
                 style: const TextStyle(color: Colors.white),
               ),
             ),
+            BottomNavigationBarItem(
+              icon: Padding(
+                child: Icon(Icons.account_circle),
+                padding: const EdgeInsets.only(top: 8.0),
+              ),
+              title: Text(
+                "Food",
+                style: const TextStyle(color: Colors.black),
+              ),
+            ),
           ],
           currentIndex: _selectedIndex,
           onTap: (int _selectedIndex) {
             switch (_selectedIndex) {
               case 0:
-                Navigator.popAndPushNamed(
-                  context,
-                  '/profileScreen'
-                );
+                Navigator.popAndPushNamed(context, '/profileScreen');
                 break;
               case 2:
-                Navigator.popAndPushNamed(
-                  context,
-                  '/recipe'
-                );
+                Navigator.popAndPushNamed(context, '/recipe');
+                break;
+              case 3:
+                Navigator.popAndPushNamed(context, '/realprofile');
                 break;
               // case 1:
               //   Navigator.push(
@@ -115,7 +122,7 @@ class _InputPageState extends State<InputPage> {
               // case 2:
               //   Navigator.popAndPushNamed(
               //     context,
-                  
+
               //   );
               //   break;
             }

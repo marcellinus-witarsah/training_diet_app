@@ -60,6 +60,16 @@ class ProfileScreen extends StatelessWidget {
                 style: const TextStyle(color: Colors.white),
               ),
             ),
+            BottomNavigationBarItem(
+              icon: Padding(
+                child: Icon(Icons.account_circle),
+                padding: const EdgeInsets.only(top: 8.0),
+              ),
+              title: Text(
+                "Profile",
+                style: const TextStyle(color: Colors.white),
+              ),
+            ),
           ],
           currentIndex: _selectedIndex,
           onTap: (int _selectedIndex) {
@@ -82,6 +92,12 @@ class ProfileScreen extends StatelessWidget {
                 Navigator.popAndPushNamed(
                   context,
                   '/recipe',
+                );
+                break;
+              case 3:
+                Navigator.popAndPushNamed(
+                  context,
+                  '/realprofile',
                 );
                 break;
               // case 2: test@test.testtest

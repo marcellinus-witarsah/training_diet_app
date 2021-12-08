@@ -1,14 +1,25 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:training_and_diet_app/model/user_model.dart';
 
 class AuthService {
-  final FirebaseAuth auth;
-  AuthService({this.auth});
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  UserModel _userFromFirebase(User user) {
+    if (user == null) {
+      return null;
+    }
+    return UserModel(user.uid);
+  }
+
+  Stream<UserModel> get user {
+    return _auth.authStateChanges().map(_userFromFirebase);
+  }
 
   Future login(email, password) async {
     try {
-      UserCredential userCredential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
       return userCredential;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -22,7 +33,7 @@ class AuthService {
 
   Future register(email, password) async {
     try {
-      UserCredential userCredential = await FirebaseAuth.instance
+      UserCredential userCredential = await _auth
           .createUserWithEmailAndPassword(email: email, password: password);
       return userCredential;
     } on FirebaseAuthException catch (e) {
@@ -40,7 +51,7 @@ class AuthService {
 
   Future logout() async {
     try {
-      return await auth.signOut();
+      return await _auth.signOut();
     } catch (e) {
       return e.toString();
     }

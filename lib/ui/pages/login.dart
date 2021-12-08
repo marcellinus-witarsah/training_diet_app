@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:training_and_diet_app/services/auth.dart';
 import 'package:training_and_diet_app/ui/pages/register.dart';
 import 'package:training_and_diet_app/ui/pages/profile_screen.dart';
@@ -13,11 +14,13 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  final _authService = AuthService();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    final _authService = AuthService();
+    // final _authService = Provider.of<AuthService>(context);
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(

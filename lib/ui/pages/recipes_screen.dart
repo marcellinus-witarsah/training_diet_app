@@ -25,83 +25,90 @@ class RecipePageState extends State<RecipePage> {
     const double _iconSize = 20.0;
 
     return DefaultTabController(
-      length: 4,
+      length: 2,
       child: Scaffold(
         bottomNavigationBar: ClipRRect(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
-        child: BottomNavigationBar(
-          iconSize: 40,
-          selectedIconTheme: IconThemeData(
-            color: const Color(0xFF200087),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
+          child: BottomNavigationBar(
+            iconSize: 40,
+            selectedIconTheme: IconThemeData(
+              color: const Color(0xFF200087),
+            ),
+            unselectedIconTheme: IconThemeData(
+              color: Colors.black12,
+            ),
+            items: [
+              BottomNavigationBarItem(
+                icon: Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Icon(Icons.home),
+                ),
+                title: Text(
+                  "Home",
+                  style: const TextStyle(color: Colors.white),
+                ),
+              ),
+              BottomNavigationBarItem(
+                icon: Padding(
+                  child: Icon(Icons.calculate),
+                  padding: const EdgeInsets.only(top: 8.0),
+                ),
+                title: Text(
+                  "BMI Calculator",
+                  style: const TextStyle(color: Colors.white),
+                ),
+              ),
+              BottomNavigationBarItem(
+                icon: Padding(
+                  child: Icon(Icons.food_bank_rounded),
+                  padding: const EdgeInsets.only(top: 8.0),
+                ),
+                title: Text(
+                  "Food",
+                  style: const TextStyle(color: Colors.white),
+                ),
+              ),
+              BottomNavigationBarItem(
+                icon: Padding(
+                  child: Icon(Icons.account_circle),
+                  padding: const EdgeInsets.only(top: 8.0),
+                ),
+                title: Text(
+                  "Food",
+                  style: const TextStyle(color: Colors.black),
+                ),
+              ),
+            ],
+            currentIndex: _selectedIndex,
+            onTap: (int _selectedIndex) {
+              switch (_selectedIndex) {
+                case 0:
+                  Navigator.popAndPushNamed(context, '/profileScreen');
+                  break;
+                case 1:
+                  Navigator.popAndPushNamed(context, '/bmi');
+                  break;
+                case 3:
+                  Navigator.popAndPushNamed(context, '/realprofile');
+                  break;
+                // case 1:
+                //   Navigator.push(
+                //     context,
+                //     MaterialPageRoute(builder: (context) {
+                //       return InputPage();
+                //     }),
+                //   );
+                //   break;
+                // case 2:
+                //   Navigator.popAndPushNamed(
+                //     context,
+
+                //   );
+                //   break;
+              }
+            },
           ),
-          unselectedIconTheme: IconThemeData(
-            color: Colors.black12,
-          ),
-          items: [
-            BottomNavigationBarItem(
-              icon: Padding(
-                padding: const EdgeInsets.only(top: 8.0),
-                child: Icon(Icons.home),
-              ),
-              title: Text(
-                "Home",
-                style: const TextStyle(color: Colors.white),
-              ),
-            ),
-            BottomNavigationBarItem(
-              icon: Padding(
-                child: Icon(Icons.calculate),
-                padding: const EdgeInsets.only(top: 8.0),
-              ),
-              title: Text(
-                "BMI Calculator",
-                style: const TextStyle(color: Colors.white),
-              ),
-            ),
-            BottomNavigationBarItem(
-              icon: Padding(
-                child: Icon(Icons.food_bank_rounded),
-                padding: const EdgeInsets.only(top: 8.0),
-              ),
-              title: Text(
-                "Food",
-                style: const TextStyle(color: Colors.white),
-              ),
-            ),
-          ],
-          currentIndex: _selectedIndex,
-          onTap: (int _selectedIndex) {
-            switch (_selectedIndex) {
-              case 0:
-                Navigator.popAndPushNamed(
-                  context,
-                  '/profileScreen'
-                );
-                break;
-              case 1:
-                Navigator.popAndPushNamed(
-                  context,
-                  '/bmi'
-                );
-                break;
-              // case 1:
-              //   Navigator.push(
-              //     context,
-              //     MaterialPageRoute(builder: (context) {
-              //       return InputPage();
-              //     }),
-              //   );
-              //   break;
-              // case 2:
-              //   Navigator.popAndPushNamed(
-              //     context,
-                  
-              //   );
-              //   break;
-            }
-          },
         ),
-      ),
         appBar: PreferredSize(
           // We set Size equal to passed height (50.0) and infinite width:
           preferredSize: Size.fromHeight(50.0),
@@ -112,8 +119,8 @@ class RecipePageState extends State<RecipePage> {
               tabs: [
                 Tab(icon: Icon(Icons.restaurant, size: _iconSize)),
                 Tab(icon: Icon(Icons.local_drink, size: _iconSize)),
-                //Tab(icon: Icon(Icons.favorite, size: _iconSize)),
-                //Tab(icon: Icon(Icons.settings, size: _iconSize)),
+                // Tab(icon: Icon(Icons.favorite, size: _iconSize)),
+                // Tab(icon: Icon(Icons.settings, size: _iconSize)),
               ],
             ),
           ),
@@ -134,9 +141,9 @@ class RecipePageState extends State<RecipePage> {
     //} else if (!appState.isLoading && appState.user == null) {
       //return new LoginScreen();
     } else {*/
-      return _buildTabView(
-        body: _buildTabsContent(),
-      );
+    return _buildTabView(
+      body: _buildTabsContent(),
+    );
     //}
   }
 
@@ -195,10 +202,9 @@ class RecipePageState extends State<RecipePage> {
                         .where((d) => ids == null || ids.contains(d.id))
                         .map((document) {
                       return new RecipeCard(
-                        recipe:
-                            Recipe.fromMap(document.data(), document.id),
+                        recipe: Recipe.fromMap(document.data(), document.id),
                         //inFavorites:
-                          //  appState.favorites.contains(document.documentID),
+                        //  appState.favorites.contains(document.documentID),
                         //onFavoriteButtonPressed: _handleFavoritesListChanged,
                       );
                     }).toList(),
@@ -279,10 +285,11 @@ class RecipeCard extends StatelessWidget {
   //final bool inFavorites;
   //final Function onFavoriteButtonPressed;
 
-  RecipeCard(
-      {@required this.recipe,
-      /*@required this.inFavorites,
-      @required this.onFavoriteButtonPressed*/});
+  RecipeCard({
+    @required this.recipe,
+    /*@required this.inFavorites,
+      @required this.onFavoriteButtonPressed*/
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -304,11 +311,11 @@ class RecipeCard extends StatelessWidget {
 
     return GestureDetector(
       onTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => new DetailScreen(recipe/*, inFavorites*/),
-            ),
-          ),
+        context,
+        MaterialPageRoute(
+          builder: (context) => new DetailScreen(recipe /*, inFavorites*/),
+        ),
+      ),
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
         child: Card(
