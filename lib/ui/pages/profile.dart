@@ -183,12 +183,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                   width: 300.00,
                                   child: RaisedButton(
                                       onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ProfileEdit()),
-                                        );
+                                        Navigator.popAndPushNamed(
+                                            context, '/edit');
                                       },
                                       shape: RoundedRectangleBorder(
                                           borderRadius:

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:training_and_diet_app/model/user_model.dart';
 import 'package:training_and_diet_app/services/auth.dart';
 import 'package:training_and_diet_app/ui/pages/login.dart';
+import 'package:training_and_diet_app/ui/pages/profile.dart';
 import 'package:training_and_diet_app/ui/pages/profile_screen.dart';
 
 class Wrapper extends StatefulWidget {
@@ -22,6 +23,7 @@ class _WrapperState extends State<Wrapper> {
         if (snapshot.data == null) {
           return new Login();
         } else {
+          // return new Homepage();
           return new Homepage();
         }
       },
