@@ -46,30 +46,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-
-
-// class MyApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MultiProvider(
-//         providers: [
-//           Provider<AuthService>(create: (_) => new AuthService()),
-//         ],
-//         child: MaterialApp(
-//           title: 'Flutter Demo',
-//           debugShowCheckedModeBanner: false,
-//           theme: ThemeData(
-//             primarySwatch: Colors.blue,
-//           ),
-//           home: Login(),
-//           routes: <String, WidgetBuilder>{
-//             '/login': (BuildContext context) => new Login(),
-//             '/profileScreen': (BuildContext context) => new ProfileScreen(),
-//             '/bmi': (BuildContext context) => new InputPage(),
-//             '/recipe': (BuildContext context) => new RecipePage(),
-//             '/realprofile': (BuildContext context) => new ProfilePage()
-//           },
-//         ));
-//   }
-// }
-

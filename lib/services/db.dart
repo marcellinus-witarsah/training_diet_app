@@ -8,7 +8,11 @@ class DatabaseService {
   }
 
   void addData(uid, collection, data) {
-    collection.doc(uid).set(data);
+    collection.doc(uid).set(data).then;
+  }
+
+  Future<DocumentSnapshot> getUserData(uid) {
+    return users.doc(uid).get();
   }
 
   CollectionReference get users {

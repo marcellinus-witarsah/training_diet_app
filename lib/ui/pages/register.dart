@@ -2,6 +2,7 @@ import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:training_and_diet_app/services/auth.dart';
 import 'package:training_and_diet_app/services/db.dart';
@@ -23,11 +24,35 @@ class _RegisterState extends State<Register> {
   String _gender = "Male";
   @override
   Widget build(BuildContext context) {
-    // @override
-    // void initState() {
-    //   super.initState();
-    //   _gender = 'Male';
-    // }
+    void signUp() async {
+      UserCredential result = await _authService.register(
+          _emailController.text, _passwordController.text);
+      print("lewat ${result}");
+      if (result != null) {
+        Map<String, dynamic> data = {
+          "email": _emailController.text,
+          "password": _passwordController.text,
+          "gender": _gender,
+          "bmi": 0,
+          "calories": 0,
+          "first_name": "",
+          "last_name": "",
+          "height": 0,
+          "weight": 0,
+        };
+        _db.addData(result.user.uid, _db.users, data);
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("Registration Succesfull"),
+        ));
+        Navigator.pop(context);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("Registration Failed"),
+        ));
+        print("Registration Failed");
+      }
+      return;
+    }
 
     return Scaffold(
       body: Container(
@@ -201,20 +226,8 @@ class _RegisterState extends State<Register> {
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(30)),
                       child: TextButton(
-                        onPressed: () async {
-                          User user = await _authService.register(
-                              _emailController.text, _passwordController.text);
-                          if (user != null) {
-                            // Map<String, dynamic> data = {
-                            //   "email": _emailController.text,
-                            //   "password": _passwordController.text,
-                            //   "gender": _gender
-                            // };
-                            // _db.addData(user.uid, _db.users, data);
-                            Navigator.pop(context);
-                          } else {
-                            print("Register Failed");
-                          }
+                        onPressed: () {
+                          signUp();
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
