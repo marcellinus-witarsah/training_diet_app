@@ -3,13 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:training_and_diet_app/model/meal.dart';
+import 'package:training_and_diet_app/ui/bottom_nav_bar.dart';
 import 'package:training_and_diet_app/ui/pages/meal_detail_screen.dart';
 import 'package:training_and_diet_app/ui/pages/workout_screen.dart';
 import 'package:training_and_diet_app/ui/pages/bmiscreen.dart';
 import 'package:vector_math/vector_math_64.dart' as math;
 import 'package:animations/animations.dart';
 
-class ProfileScreen extends StatelessWidget {
+class Homepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -21,96 +22,7 @@ class ProfileScreen extends StatelessWidget {
       backgroundColor: const Color(0xFFE9E9E9),
       bottomNavigationBar: ClipRRect(
         borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
-        child: BottomNavigationBar(
-          iconSize: 40,
-          selectedIconTheme: IconThemeData(
-            color: const Color(0xFF200087),
-          ),
-          unselectedIconTheme: IconThemeData(
-            color: Colors.black12,
-          ),
-          items: [
-            BottomNavigationBarItem(
-              icon: Padding(
-                padding: const EdgeInsets.only(top: 8.0),
-                child: Icon(Icons.home),
-              ),
-              title: Text(
-                "Home",
-                style: const TextStyle(color: Colors.white),
-              ),
-            ),
-            BottomNavigationBarItem(
-              icon: Padding(
-                child: Icon(Icons.calculate),
-                padding: const EdgeInsets.only(top: 8.0),
-              ),
-              title: Text(
-                "BMI Calculator",
-                style: const TextStyle(color: Colors.white),
-              ),
-            ),
-            BottomNavigationBarItem(
-              icon: Padding(
-                child: Icon(Icons.food_bank_rounded),
-                padding: const EdgeInsets.only(top: 8.0),
-              ),
-              title: Text(
-                "Food",
-                style: const TextStyle(color: Colors.white),
-              ),
-            ),
-            BottomNavigationBarItem(
-              icon: Padding(
-                child: Icon(Icons.account_circle),
-                padding: const EdgeInsets.only(top: 8.0),
-              ),
-              title: Text(
-                "Profile",
-                style: const TextStyle(color: Colors.white),
-              ),
-            ),
-          ],
-          currentIndex: _selectedIndex,
-          onTap: (int _selectedIndex) {
-            switch (_selectedIndex) {
-              // case 0:
-              //   Navigator.push(
-              //     context,
-              //     MaterialPageRoute(builder: (context) {
-              //       return ProfileScreen();
-              //     }),
-              //   );
-              //   break;
-              case 1:
-                Navigator.popAndPushNamed(
-                  context,
-                  '/bmi',
-                );
-                break;
-              case 2:
-                Navigator.popAndPushNamed(
-                  context,
-                  '/recipe',
-                );
-                break;
-              case 3:
-                Navigator.popAndPushNamed(
-                  context,
-                  '/realprofile',
-                );
-                break;
-              // case 2: test@test.testtest
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) {
-              //     return ProfileScreen();
-              //   }),
-              // );
-              // break;
-            }
-          },
-        ),
+        child: BottomNavBar(0),
       ),
       body: Stack(
         children: <Widget>[

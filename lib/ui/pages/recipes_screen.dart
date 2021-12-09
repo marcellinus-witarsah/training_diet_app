@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:training_and_diet_app/model/recipe.dart';
+import 'package:training_and_diet_app/services/db.dart';
+import 'package:training_and_diet_app/ui/bottom_nav_bar.dart';
 import 'package:training_and_diet_app/ui/pages/recipes_detail.dart';
 //import 'package:recipes_app/utils/store.dart';
 //import 'package:recipes_app/ui/widgets/recipe_card.dart';
@@ -11,7 +13,7 @@ import 'package:training_and_diet_app/ui/pages/recipes_detail.dart';
 //import 'package:recipes_app/ui/widgets/settings_button.dart';
 
 int _selectedIndex = 2;
-FirebaseFirestore firestore = FirebaseFirestore.instance;
+final _db = DatabaseService();
 
 class RecipePage extends StatefulWidget {
   @override
@@ -29,100 +31,14 @@ class RecipePageState extends State<RecipePage> {
       child: Scaffold(
         bottomNavigationBar: ClipRRect(
           borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
-          child: BottomNavigationBar(
-            iconSize: 40,
-            selectedIconTheme: IconThemeData(
-              color: const Color(0xFF200087),
-            ),
-            unselectedIconTheme: IconThemeData(
-              color: Colors.black12,
-            ),
-            items: [
-              BottomNavigationBarItem(
-                icon: Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: Icon(Icons.home),
-                ),
-                title: Text(
-                  "Home",
-                  style: const TextStyle(color: Colors.white),
-                ),
-              ),
-              BottomNavigationBarItem(
-                icon: Padding(
-                  child: Icon(Icons.calculate),
-                  padding: const EdgeInsets.only(top: 8.0),
-                ),
-                title: Text(
-                  "BMI Calculator",
-                  style: const TextStyle(color: Colors.white),
-                ),
-              ),
-              BottomNavigationBarItem(
-                icon: Padding(
-                  child: Icon(Icons.food_bank_rounded),
-                  padding: const EdgeInsets.only(top: 8.0),
-                ),
-                title: Text(
-                  "Food",
-                  style: const TextStyle(color: Colors.white),
-                ),
-              ),
-              BottomNavigationBarItem(
-                icon: Padding(
-                  child: Icon(Icons.account_circle),
-                  padding: const EdgeInsets.only(top: 8.0),
-                ),
-                title: Text(
-                  "Food",
-                  style: const TextStyle(color: Colors.black),
-                ),
-              ),
-            ],
-            currentIndex: _selectedIndex,
-            onTap: (int _selectedIndex) {
-              switch (_selectedIndex) {
-                case 0:
-                  Navigator.popAndPushNamed(context, '/profileScreen');
-                  break;
-                case 1:
-                  Navigator.popAndPushNamed(context, '/bmi');
-                  break;
-                case 3:
-                  Navigator.popAndPushNamed(context, '/realprofile');
-                  break;
-                // case 1:
-                //   Navigator.push(
-                //     context,
-                //     MaterialPageRoute(builder: (context) {
-                //       return InputPage();
-                //     }),
-                //   );
-                //   break;
-                // case 2:
-                //   Navigator.popAndPushNamed(
-                //     context,
-
-                //   );
-                //   break;
-              }
-            },
-          ),
+          child: BottomNavBar(2),
         ),
         appBar: PreferredSize(
           // We set Size equal to passed height (50.0) and infinite width:
           preferredSize: Size.fromHeight(50.0),
           child: AppBar(
             elevation: 2.0,
-            bottom: TabBar(
-              labelColor: Theme.of(context).indicatorColor,
-              tabs: [
-                Tab(icon: Icon(Icons.restaurant, size: _iconSize)),
-                Tab(icon: Icon(Icons.local_drink, size: _iconSize)),
-                // Tab(icon: Icon(Icons.favorite, size: _iconSize)),
-                // Tab(icon: Icon(Icons.settings, size: _iconSize)),
-              ],
-            ),
+            backgroundColor: Color(0xFF200087),
           ),
         ),
         body: Padding(
@@ -170,19 +86,11 @@ class RecipePageState extends State<RecipePage> {
   }*/
 
   TabBarView _buildTabsContent() {
-    Padding _buildRecipes({RecipeType recipeType, List<String> ids}) {
-      CollectionReference collectionReference =
-          FirebaseFirestore.instance.collection('recipes');
+    Padding _buildRecipes({List<String> ids}) {
       Stream<QuerySnapshot> stream;
       // The argument recipeType is set
-      if (recipeType != null) {
-        stream = collectionReference
-            .where("type", isEqualTo: recipeType.index)
-            .snapshots();
-      } else {
-        // Use snapshots of all recipes if recipeType has not been passed
-        stream = collectionReference.snapshots();
-      }
+      stream = _db.recipes.snapshots();
+      // Use snapshots of all recipes if recipeType has not been passed
 
       // Define query depeneding on passed args
       return Padding(
@@ -219,8 +127,8 @@ class RecipePageState extends State<RecipePage> {
 
     return TabBarView(
       children: [
-        _buildRecipes(recipeType: RecipeType.food),
-        _buildRecipes(recipeType: RecipeType.drink),
+        _buildRecipes(),
+        _buildRecipes(),
         // _buildRecipes(ids: appState.favorites),
         //_buildSettings(),
       ],
@@ -319,6 +227,7 @@ class RecipeCard extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
         child: Card(
+          color: Color(0xFF200087),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -361,17 +270,24 @@ class RecipeTitle extends StatelessWidget {
         children: <Widget>[
           Text(
             recipe.name,
-            style: Theme.of(context).textTheme.headline6,
+            style: TextStyle(color: Colors.white, fontSize: 25),
           ),
           // Empty space:
           SizedBox(height: 10.0),
           Row(
             children: [
-              Icon(Icons.timer, size: 20.0),
+              Icon(
+                Icons.timer,
+                size: 20.0,
+                color: Colors.white,
+              ),
               SizedBox(width: 5.0),
               Text(
                 recipe.getDurationString,
-                style: Theme.of(context).textTheme.caption,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                ),
               ),
             ],
           ),

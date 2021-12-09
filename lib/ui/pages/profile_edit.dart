@@ -21,8 +21,11 @@ class _ProfileEditState extends State<ProfileEdit> {
   final _heightController = TextEditingController();
   final _weightController = TextEditingController();
   final _ageController = TextEditingController();
+  final _firstNameController = TextEditingController();
+  final _lastNameController = TextEditingController();
   String _gender = '';
 
+// https://firebase.flutter.dev/docs/firestore/usage
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -31,13 +34,34 @@ class _ProfileEditState extends State<ProfileEdit> {
         // return Text(snapshot.data.uid);
         return Scaffold(
           appBar: AppBar(
-            title: Text('Flutter TextField Example'),
+            title: Text('Profile Edit page'),
+            backgroundColor: Color(0xFF200087),
           ),
           body: Padding(
             padding: EdgeInsets.all(15),
             child: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.all(15),
+                    child: TextField(
+                      controller: _firstNameController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'First name',
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(15),
+                    child: TextField(
+                      controller: _lastNameController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Last name',
+                      ),
+                    ),
+                  ),
                   Padding(
                     padding: EdgeInsets.all(15),
                     child: TextField(
@@ -55,7 +79,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                       controller: _weightController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
-                        labelText: 'Weight',
+                        labelText: 'Weight in kg',
                       ),
                       keyboardType: TextInputType.number,
                     ),
@@ -71,12 +95,19 @@ class _ProfileEditState extends State<ProfileEdit> {
                       keyboardType: TextInputType.number,
                     ),
                   ),
-                  RaisedButton(
-                    textColor: Colors.white,
-                    color: Colors.blue,
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Color(0xFF200087),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+                      textStyle:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
                     child: Text('Save Changes'),
                     onPressed: () {
                       Map<String, dynamic> data = {
+                        "first_name": _firstNameController.text,
+                        "last_name": _lastNameController.text,
                         "height": double.parse(_heightController.text),
                         "weight": double.parse(_weightController.text),
                         "age": int.parse(_ageController.text),
@@ -86,10 +117,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content: Text("Profile edit has been saved"),
                       ));
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ProfilePage()));
+                      Navigator.popAndPushNamed(context, '/realprofile');
                     },
                   )
                 ],

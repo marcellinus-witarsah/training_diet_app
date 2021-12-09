@@ -37,7 +37,7 @@ class _MyAppState extends State<MyApp> {
       home: new Wrapper(),
       routes: <String, WidgetBuilder>{
         '/login': (BuildContext context) => new Login(),
-        '/profileScreen': (BuildContext context) => new ProfileScreen(),
+        '/home': (BuildContext context) => new Homepage(),
         '/bmi': (BuildContext context) => new InputPage(),
         '/recipe': (BuildContext context) => new RecipePage(),
         '/realprofile': (BuildContext context) => new ProfilePage(),

@@ -130,12 +130,7 @@ class _LoginState extends State<Login> {
                             _emailController.text, _passwordController.text);
                         if (user != null) {
                           print("Masukk BOSS");
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) {
-                              return ProfileScreen();
-                            }),
-                          );
+                          Navigator.popAndPushNamed(context, '/home');
                         } else {
                           print("Error");
                         }

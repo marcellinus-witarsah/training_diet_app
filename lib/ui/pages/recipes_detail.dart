@@ -13,7 +13,7 @@ class DetailScreen extends StatefulWidget {
   final Recipe recipe;
   //final bool inFavorites;
 
-  DetailScreen(this.recipe/*, this.inFavorites*/);
+  DetailScreen(this.recipe /*, this.inFavorites*/);
 
   @override
   _DetailScreenState createState() => _DetailScreenState();
@@ -23,8 +23,8 @@ class _DetailScreenState extends State<DetailScreen>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
   ScrollController _scrollController;
-  bool _inFavorites;
- // StateModel appState;
+  // bool _inFavorites;
+  // StateModel appState;
 
   @override
   void initState() {
@@ -44,7 +44,7 @@ class _DetailScreenState extends State<DetailScreen>
 
   void _toggleInFavorites() {
     setState(() {
-      _inFavorites = !_inFavorites;
+      // _inFavorites = !_inFavorites;
     });
   }
 
@@ -58,7 +58,7 @@ class _DetailScreenState extends State<DetailScreen>
         headerSliverBuilder: (BuildContext context, bool innerViewIsScrolled) {
           return <Widget>[
             SliverAppBar(
-              backgroundColor: Colors.white,
+              backgroundColor: Color(0xFF200087),
               flexibleSpace: FlexibleSpaceBar(
                 collapseMode: CollapseMode.pin,
                 background: Column(
@@ -76,7 +76,7 @@ class _DetailScreenState extends State<DetailScreen>
               forceElevated: innerViewIsScrolled,
               bottom: TabBar(
                 tabs: <Widget>[
-                  Tab(text: "Home"),
+                  Tab(text: "Ingredients"),
                   Tab(text: "Preparation"),
                 ],
                 controller: _tabController,
@@ -91,20 +91,6 @@ class _DetailScreenState extends State<DetailScreen>
           ],
           controller: _tabController,
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          /*updateFavorites(appState.user.uid, widget.recipe.id).then((result) {
-            // Toggle "in favorites" if the result was successful.
-            if (result) _toggleInFavorites();
-          });*/
-        },
-        child: Icon(
-          _inFavorites ? Icons.favorite : Icons.favorite_border,
-          color: Theme.of(context).iconTheme.color,
-        ),
-        elevation: 2.0,
-        backgroundColor: Colors.white,
       ),
     );
   }

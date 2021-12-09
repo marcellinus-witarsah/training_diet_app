@@ -15,7 +15,7 @@ class DatabaseService {
     return users.doc(uid).get();
   }
 
-  CollectionReference get users {
-    return _db.collection("users");
-  }
+  CollectionReference get users => _db.collection("users");
+
+  CollectionReference get recipes => _db.collection('recipes');
 }

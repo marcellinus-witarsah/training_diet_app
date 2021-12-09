@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:training_and_diet_app/ui/bottom_nav_bar.dart';
 //import 'package:training_and_diet_app/ui/pages/profile_screen.dart';
 
 int height = 180;
@@ -49,85 +50,7 @@ class _InputPageState extends State<InputPage> {
     return Scaffold(
       bottomNavigationBar: ClipRRect(
         borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
-        child: BottomNavigationBar(
-          iconSize: 40,
-          selectedIconTheme: IconThemeData(
-            color: const Color(0xFF200087),
-          ),
-          unselectedIconTheme: IconThemeData(
-            color: Colors.black12,
-          ),
-          items: [
-            BottomNavigationBarItem(
-              icon: Padding(
-                padding: const EdgeInsets.only(top: 8.0),
-                child: Icon(Icons.home),
-              ),
-              title: Text(
-                "Home",
-                style: const TextStyle(color: Colors.white),
-              ),
-            ),
-            BottomNavigationBarItem(
-              icon: Padding(
-                child: Icon(Icons.calculate),
-                padding: const EdgeInsets.only(top: 8.0),
-              ),
-              title: Text(
-                "BMI Calculator",
-                style: const TextStyle(color: Colors.white),
-              ),
-            ),
-            BottomNavigationBarItem(
-              icon: Padding(
-                child: Icon(Icons.food_bank_rounded),
-                padding: const EdgeInsets.only(top: 8.0),
-              ),
-              title: Text(
-                "Food",
-                style: const TextStyle(color: Colors.white),
-              ),
-            ),
-            BottomNavigationBarItem(
-              icon: Padding(
-                child: Icon(Icons.account_circle),
-                padding: const EdgeInsets.only(top: 8.0),
-              ),
-              title: Text(
-                "Food",
-                style: const TextStyle(color: Colors.black),
-              ),
-            ),
-          ],
-          currentIndex: _selectedIndex,
-          onTap: (int _selectedIndex) {
-            switch (_selectedIndex) {
-              case 0:
-                Navigator.popAndPushNamed(context, '/profileScreen');
-                break;
-              case 2:
-                Navigator.popAndPushNamed(context, '/recipe');
-                break;
-              case 3:
-                Navigator.popAndPushNamed(context, '/realprofile');
-                break;
-              // case 1:
-              //   Navigator.push(
-              //     context,
-              //     MaterialPageRoute(builder: (context) {
-              //       return InputPage();
-              //     }),
-              //   );
-              //   break;
-              // case 2:
-              //   Navigator.popAndPushNamed(
-              //     context,
-
-              //   );
-              //   break;
-            }
-          },
-        ),
+        child: BottomNavBar(1),
       ),
       backgroundColor: Color(0xFF0A0E21),
       // appBar: AppBar(

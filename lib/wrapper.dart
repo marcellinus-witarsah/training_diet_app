@@ -22,7 +22,7 @@ class _WrapperState extends State<Wrapper> {
         if (snapshot.data == null) {
           return new Login();
         } else {
-          return new ProfileScreen();
+          return new Homepage();
         }
       },
     );
