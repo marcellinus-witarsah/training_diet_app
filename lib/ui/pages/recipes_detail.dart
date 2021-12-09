@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'package:training_and_diet_app/model/recipe.dart';
 import 'package:training_and_diet_app/ui/pages/recipes_screen.dart';
-//import 'package:recipes_app/ui/widgets/recipe_title.dart';
-//import 'package:recipes_app/model/state.dart';
-//import 'package:recipes_app/state_widget.dart';
-//import 'package:recipes_app/utils/store.dart';
-//import 'package:recipes_app/ui/widgets/recipe_image.dart';
-//import 'package:recipes_app/ui/widgets/recipe_card.dart';
 
 class DetailScreen extends StatefulWidget {
   final Recipe recipe;
@@ -23,15 +16,12 @@ class _DetailScreenState extends State<DetailScreen>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
   ScrollController _scrollController;
-  // bool _inFavorites;
-  // StateModel appState;
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(vsync: this, length: 2);
     _scrollController = ScrollController();
-    //_inFavorites = widget.inFavorites;
   }
 
   @override
@@ -40,12 +30,6 @@ class _DetailScreenState extends State<DetailScreen>
     _tabController.dispose();
     _scrollController.dispose();
     super.dispose();
-  }
-
-  void _toggleInFavorites() {
-    setState(() {
-      // _inFavorites = !_inFavorites;
-    });
   }
 
   @override

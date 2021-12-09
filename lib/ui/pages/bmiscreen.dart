@@ -2,17 +2,15 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:training_and_diet_app/ui/bottom_nav_bar.dart';
-//import 'package:training_and_diet_app/ui/pages/profile_screen.dart';
 
 int height = 180;
-int wieght = 10;
+int weight = 10;
 int age = 10;
-int _selectedIndex = 1;
 
 void reset() {
   height = 120;
   age = 0;
-  wieght = 0;
+  weight = 0;
 }
 
 enum Gender { male, female }
@@ -30,21 +28,6 @@ class _InputPageState extends State<InputPage> {
   Color mc = inactivCardColor;
   Color fc = inactivCardColor;
 
-  // void cch(Gender gendertype) {
-  //   if (gendertype == Gender.male) {
-  //     (mc == inactivCardColor)
-  //         ? {
-  //             mc = colourrr,
-  //             fc = inactivCardColor,
-  //           }
-  //         : mc = inactivCardColor;
-  //   } else if (gendertype == Gender.female) {
-  //     (fc == inactivCardColor)
-  //         ? {fc = colourrr, mc = inactivCardColor}
-  //         : fc = inactivCardColor;
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,59 +35,18 @@ class _InputPageState extends State<InputPage> {
         borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
         child: BottomNavBar(1),
       ),
-      backgroundColor: Color(0xFF0A0E21),
-      // appBar: AppBar(
-      //   title: Center(
-      //     child: Text('BMI CALCULATOR'),
+      backgroundColor: Colors.white,
+      // decoration: BoxDecoration(
+      //     gradient: LinearGradient(
+      //         begin: Alignment.topRight,
+      //         end: Alignment.bottomLeft,
+      //         colors: [Color(0xFF20008B), Colors.black]),
       //   ),
-      //   leading: GestureDetector(
-      //       onTap: () {
-      //         setState(() {
-      //           reset();
-      //         });
-      //       },
-      //       child: Icon(Icons.refresh)),
-      // ),
       body: Column(
         children: <Widget>[
           Container(
             height: 100,
           ),
-          // Expanded(
-          //   child: Row(
-          //     crossAxisAlignment: CrossAxisAlignment.start,
-          //     children: <Widget>[
-          //       Expanded(
-          //         child: ReusableCard(
-          //           colorr: mc,
-          //           cardChild: ReusableCol(
-          //             icona: FontAwesomeIcons.mars,
-          //             texta: 'Male',
-          //           ),
-          //           onPress: () {
-          //             setState(() {
-          //               cch(Gender.male);
-          //             });
-          //           },
-          //         ),
-          //       ),
-          //       Expanded(
-          //         child: ReusableCard(
-          //           colorr: fc,
-          //           onPress: () {
-          //             setState(() {
-          //               cch(Gender.female);
-          //             });
-          //           },
-          //           cardChild: ReusableCol(
-          //             icona: FontAwesomeIcons.venus,
-          //             texta: 'Female',
-          //           ),
-          //         ),
-          //       ),
-          //     ],
-          //   ),
-          // ),
           Expanded(
             child: Row(
               children: <Widget>[
@@ -119,8 +61,7 @@ class _InputPageState extends State<InputPage> {
                         ),
                         Text(
                           'HEIGHT',
-                          style: TextStyle(
-                              fontSize: 18.0, color: Color(0XFF8D8E98)),
+                          style: TextStyle(fontSize: 18.0, color: Colors.white),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -135,7 +76,7 @@ class _InputPageState extends State<InputPage> {
                                 )),
                             Text('CM',
                                 style: TextStyle(
-                                    fontSize: 18.0, color: Color(0XFF8D8E98)))
+                                    fontSize: 18.0, color: Colors.white))
                           ],
                         ),
                         Flexible(
@@ -183,10 +124,10 @@ class _InputPageState extends State<InputPage> {
                         Text('WEIGHT',
                             style: TextStyle(
                               fontSize: 18.0,
-                              color: Color(0XFF8D8E98),
+                              color: Colors.white,
                             )),
                         Text(
-                          wieght.toString(),
+                          weight.toString(),
                           style: TextStyle(
                             fontWeight: FontWeight.w900,
                             fontSize: 50.0,
@@ -201,7 +142,9 @@ class _InputPageState extends State<InputPage> {
                                 iconvalue: FontAwesomeIcons.minus,
                                 f: () {
                                   setState(() {
-                                    wieght--;
+                                    if (weight > 0) {
+                                      weight--;
+                                    }
                                   });
                                 },
                               ),
@@ -209,7 +152,7 @@ class _InputPageState extends State<InputPage> {
                                 iconvalue: FontAwesomeIcons.plus,
                                 f: () {
                                   setState(() {
-                                    wieght++;
+                                    weight++;
                                   });
                                 },
                               ),
@@ -229,7 +172,7 @@ class _InputPageState extends State<InputPage> {
                         Text('AGE',
                             style: TextStyle(
                               fontSize: 18.0,
-                              color: Color(0XFF8D8E98),
+                              color: Colors.white,
                             )),
                         Text(
                           age.toString(),
@@ -247,7 +190,9 @@ class _InputPageState extends State<InputPage> {
                                 iconvalue: FontAwesomeIcons.minus,
                                 f: () {
                                   setState(() {
-                                    age--;
+                                    if (age > 0) {
+                                      age--;
+                                    }
                                   });
                                 },
                               ),
@@ -272,7 +217,7 @@ class _InputPageState extends State<InputPage> {
           GestureDetector(
             onTap: () {
               Calculate_bmi calc =
-                  new Calculate_bmi(height: height, weight: wieght);
+                  new Calculate_bmi(height: height, weight: weight);
               Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -314,12 +259,15 @@ class Button extends StatelessWidget {
   Button({@required this.iconvalue, @required this.f});
   Widget build(BuildContext context) {
     return RawMaterialButton(
-      child: Icon(iconvalue),
+      child: Icon(
+        iconvalue,
+        color: Colors.white,
+      ),
       onPressed: f,
       constraints: BoxConstraints.tightFor(width: 56.0, height: 56.0),
       shape: CircleBorder(),
       elevation: 6.0,
-      fillColor: Color(0XFF4C4F5E),
+      fillColor: Color(0xFF5B4D9D),
     );
   }
 }
@@ -340,6 +288,14 @@ class ReusableCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: colorr,
           borderRadius: BorderRadius.circular(20.0),
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              const Color(0xFF20008B),
+              const Color(0xFF200087),
+            ],
+          ),
         ),
         height: 200,
         width: 170,
@@ -422,69 +378,91 @@ class ResultPage extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF0A0E21),
-      appBar: AppBar(
-        title: Text('BMI CALCULATOR'),
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.only(top: 10.0),
-            child: Text('  Your Results are',
-                style: TextStyle(fontSize: 35.0, fontWeight: FontWeight.w900)),
-          ),
-          Expanded(
-            child: Container(
-              padding: EdgeInsets.only(top: 20.0),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(35.0),
-                  color: Color(0xFF1D1F33)),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    bmi2,
-                    style: TextStyle(color: Colors.green, fontSize: 17.0),
-                  ),
-                  Text(
-                    bmi1,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w900,
-                      fontSize: 50.0,
+      backgroundColor: Colors.white,
+      bottomNavigationBar: BottomNavBar(1),
+      body: Padding(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Expanded(
+              child: Container(
+                  padding: EdgeInsets.only(top: 20.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(35.0),
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        const Color(0xFF20008B),
+                        const Color(0xFF200087),
+                      ],
                     ),
                   ),
-                  Text(bmi3, style: TextStyle(letterSpacing: 1.0))
-                ],
-              ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        '  Your Results are',
+                        style: TextStyle(
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.w900,
+                          color: Colors.white,
+                        ),
+                      ),
+                      Text(
+                        bmi2,
+                        style: TextStyle(
+                          color: Colors.green,
+                          fontSize: 30,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                      Text(
+                        bmi1,
+                        style: TextStyle(
+                            fontWeight: FontWeight.w900,
+                            fontSize: 50.0,
+                            color: Colors.white),
+                      ),
+                      Text(
+                        bmi3,
+                        style: TextStyle(
+                          color: Colors.white,
+                          letterSpacing: 1.0,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  )),
             ),
-          ),
-          GestureDetector(
-            onTap: () {
-              reset();
-              Navigator.pop(context);
-            },
-            child: Container(
-              child: Center(
-                child: Text(
-                  'RE-CALCULATE',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 35.0,
-                      fontWeight: FontWeight.w900),
+            GestureDetector(
+              onTap: () {
+                reset();
+                Navigator.pop(context);
+              },
+              child: Container(
+                child: Center(
+                  child: Text(
+                    'RE-CALCULATE',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 35.0,
+                        fontWeight: FontWeight.w900),
+                  ),
                 ),
+                margin: EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                  color: Colors.pink,
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                height: 80.0,
+                width: double.infinity,
               ),
-              margin: EdgeInsets.all(10.0),
-              decoration: BoxDecoration(
-                color: Colors.pink,
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              height: 80.0,
-              width: double.infinity,
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:training_and_diet_app/model/user_model.dart';
 import 'package:training_and_diet_app/services/auth.dart';
@@ -20,11 +21,20 @@ class _WrapperState extends State<Wrapper> {
     return StreamBuilder<UserModel>(
       stream: _auth.user,
       builder: (context, snapshot) {
-        if (snapshot.data == null) {
-          return new Login();
+        if (snapshot.hasData) {
+          if (snapshot.data == null) {
+            return new Login();
+          } else {
+            // return new Homepage();
+            return new Homepage();
+          }
         } else {
-          // return new Homepage();
-          return new Homepage();
+          return Scaffold(
+            body: Center(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[CircularProgressIndicator()])),
+          );
         }
       },
     );

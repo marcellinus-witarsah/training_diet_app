@@ -38,9 +38,13 @@ class _ProfilePageState extends State<ProfilePage> {
                     Container(
                         decoration: BoxDecoration(
                             gradient: LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: [Color(0xFF20008B), Colors.black])),
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            const Color(0xFF20008B),
+                            const Color(0xFF200087),
+                          ],
+                        )),
                         child: Container(
                           width: double.infinity,
                           height: 625.0,
@@ -183,8 +187,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   width: 300.00,
                                   child: RaisedButton(
                                       onPressed: () {
-                                        Navigator.popAndPushNamed(
-                                            context, '/edit');
+                                        Navigator.pushNamed(context, '/edit');
                                       },
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
@@ -232,9 +235,13 @@ class _ProfilePageState extends State<ProfilePage> {
                           child: Ink(
                             decoration: BoxDecoration(
                               gradient: LinearGradient(
-                                  begin: Alignment.centerRight,
-                                  end: Alignment.centerLeft,
-                                  colors: [Color(0xFF20008B), Colors.black]),
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  const Color(0xFF20008B),
+                                  const Color(0xFF200087),
+                                ],
+                              ),
                               borderRadius: BorderRadius.circular(30.0),
                             ),
                             child: Container(
